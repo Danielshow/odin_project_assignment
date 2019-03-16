@@ -27,6 +27,20 @@ def isSorted? list
   return true;
 end
 
+def bubblesort_2(unsorted)
+  swapped = true
+  while swapped
+    swapped= false
+    for index in 0..unsorted.length
+      break if index+1 == unsorted.length
+      if unsorted[index] > unsorted[index + 1]
+        unsorted[index], unsorted[index + 1] = unsorted[index+1], unsorted[index]
+        swapped = true
+      end
+    end
+  end
+  unsorted 
+end
 
 p isSorted? [1,2,0,4,5]
-p bubblesort [6,5,3,1,8,7,2,4]
+p bubblesort_2 [6,5,3,1,8,7,2,4]
