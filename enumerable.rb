@@ -73,10 +73,20 @@ module Enumerable
     count.length
   end
 
-  def my_map
+  def my_map(&proc)
     return self.to_enum unless block_given?
     newArray = []
+    if proc != nil
+      self.my_each{|x| newArray << proc.call(x)}
+      return newArray
+    end 
     self.my_each{|x| newArray << yield(x)}
+    newArray
+  end
+
+  def my_map_proc(&proc)
+    newArray = []
+    self.my_each{|x| newArray << proc.call(x)}
     newArray
   end
 
@@ -117,12 +127,12 @@ p longest                                       #=> "sheep"
 # puts letter.my_all? {|num| num.length >= 3}
 # p %w{ajn b ct}.my_any? {|word| word.length >= 3} 
 # p %w{ant bear catjj}.my_none? {|word| word.length == 5}
- # ary = [1, 2, 4, 2]
+ary = [1, 2, 4, 2]
 # p arymy_count { |x| x%2 == 0 }
 
 # p ary.my_count(4)
 #
-#
-# p ary.map
+pro = Proc.new {|x| x+1}
+p ary.my_map(&pro)
 
 
